@@ -1,0 +1,134 @@
+.heroSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 80px 0;
+    min-height: calc(100vh - 80px);
+}
+
+.content {
+    max-width: 600px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 80px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: 20px;
+}
+
+.italicAccent {
+    font-style: italic;
+    color: var(--color-primary);
+}
+
+.description {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.33;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: 40px;
+    max-width: 510px;
+}
+
+.ctaButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+    padding: 18px 50px;
+    border-radius: 30px;
+    border: none;
+    transition: background-color var(--transition);
+}
+
+.ctaButton:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.imageContainer {
+    position: relative;
+    border-radius: 30px;
+}
+
+.heroImage {
+    display: block;
+    width: 464px;
+    height: 526px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Floating Elements */
+.floatingElement {
+    position: absolute;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.usersIcon {
+    top: 40px;
+    right: -30px;
+    width: 40px;
+    height: 40px;
+    background-color: #fbc75e; /* Yellow */
+    color: #fff;
+    transform: rotate(-15deg);
+    border-radius: 10px;
+}
+
+.questionIcon {
+    top: 200px;
+    left: -40px;
+    width: 40px;
+    height: 40px;
+    background-color: #4535af;
+    color: #fff;
+    transform: rotate(15deg);
+    border-radius: 10px;
+}
+
+.experienceBadge {
+    bottom: 40px;
+    left: -60px;
+    background-color: var(--color-primary);
+    padding: 32px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    color: #fff;
+    min-width: 200px;
+}
+
+.checkIconWrapper {
+    width: 54px;
+    height: 54px;
+    background-color: #fff;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+.experienceText {
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.experienceCount {
+    font-size: 24px;
+    font-weight: 700;
+}

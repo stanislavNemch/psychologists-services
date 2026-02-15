@@ -1,0 +1,86 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.title {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--color-text);
+}
+
+.description {
+    font-size: 16px;
+    line-height: 1.25;
+    color: rgba(25, 26, 21, 0.5); /* Semi-transparent text */
+    margin-bottom: 40px;
+    margin-top: -10px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    padding: 16px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(25, 26, 21, 0.1);
+    font-size: 16px;
+    outline: none;
+    transition: border-color var(--transition);
+}
+
+.input:focus {
+    border-color: var(--color-primary);
+}
+
+.errorText {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-left: 4px;
+}
+
+.passwordToggle {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: rgba(25, 26, 21, 0.5);
+}
+
+.submitButton {
+    background-color: var(--color-primary);
+    color: #fff;
+    padding: 16px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 22px;
+    transition: background-color var(--transition);
+}
+
+.submitButton:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.submitButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
