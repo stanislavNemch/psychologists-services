@@ -28,9 +28,14 @@ const Header = () => {
                     <NavLink to="/" className={buildLinkClass}>
                         Home
                     </NavLink>
-                    <NavLink to="/teachers" className={buildLinkClass}>
-                        Teachers
+                    <NavLink to="/psychologists" className={buildLinkClass}>
+                        Psychologists
                     </NavLink>
+                    {currentUser && (
+                        <NavLink to="/favorites" className={buildLinkClass}>
+                            Favorites
+                        </NavLink>
+                    )}
                 </nav>
 
                 <div className={styles.authContainer}>

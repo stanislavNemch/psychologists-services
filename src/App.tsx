@@ -9,7 +9,10 @@ function App() {
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<HomePage />} />
-                <Route path="teachers" element={<div>Teachers Page</div>} />
+                <Route
+                    path="psychologists"
+                    element={<div>Psychologists Page</div>}
+                />
                 <Route path="favorites" element={<div>Favorites Page</div>} />
                 <Route path="*" element={<div>Not Found</div>} />
             </Route>
