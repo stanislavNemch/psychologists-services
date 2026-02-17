@@ -1,0 +1,22 @@
+.section {
+    padding: 64px 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f3f3f3;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 128px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+}
