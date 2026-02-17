@@ -167,12 +167,97 @@
     color: var(--color-text);
     cursor: pointer;
     align-self: flex-start;
+    margin-top: 14px;
 }
 
 .readMoreButton:hover {
     color: var(--color-primary);
 }
 
-.reviewsSection {
-    margin-top: 14px;
+.expandedContent {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.reviewsList {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.reviewItem {
+    display: flex;
+    gap: 12px;
+}
+
+.reviewerAvatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(84, 190, 150, 0.2); /* Light green background */
+    color: var(--color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.reviewContent {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Gap between name/rating and comment? Mockup shows name then stars below? No, likely name and rating grouped or stacked */
+}
+
+/* Mockup: Name (bold), then below it Rating (Star + Number). Then below that Comment. */
+.reviewerName {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.reviewRating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28; /* 18px / 14px */
+    color: var(--color-text);
+}
+
+.reviewComment {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25; /* 20/16 */
+    color: rgba(25, 26, 21, 0.5); /* Text color with opacity */
+    margin: 0;
+    margin-top: 4px; /* Slight separation */
+}
+
+.appointmentButton {
+    align-self: flex-start;
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 14px 32px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.appointmentButton:hover {
+    background-color: var(--color-primary-hover);
 }

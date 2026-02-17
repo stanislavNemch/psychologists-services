@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Psychologist } from "../../types/psychologist";
 import styles from "./PsychologistCard.module.css";
 import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
@@ -14,6 +15,8 @@ const PsychologistCard: React.FC<PsychologistCardProps> = ({
     onToggleFavorite,
     isFavorite,
 }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+
     return (
         <div className={styles.card}>
             <div className={styles.avatarWrapper}>
@@ -87,7 +90,48 @@ const PsychologistCard: React.FC<PsychologistCardProps> = ({
 
                 <p className={styles.description}>{psychologist.about}</p>
 
-                <button className={styles.readMoreButton}>Read more</button>
+                {!isExpanded && (
+                    <button
+                        className={styles.readMoreButton}
+                        onClick={() => setIsExpanded(true)}
+                    >
+                        Read more
+                    </button>
+                )}
+
+                {isExpanded && (
+                    <div className={styles.expandedContent}>
+                        <ul className={styles.reviewsList}>
+                            {psychologist.reviews.map((review, index) => (
+                                <li key={index} className={styles.reviewItem}>
+                                    <div className={styles.reviewerAvatar}>
+                                        {review.reviewer
+                                            .charAt(0)
+                                            .toUpperCase()}
+                                    </div>
+                                    <div className={styles.reviewContent}>
+                                        <h4 className={styles.reviewerName}>
+                                            {review.reviewer}
+                                        </h4>
+                                        <div className={styles.reviewRating}>
+                                            <FaStar
+                                                className={styles.starIcon}
+                                                size={16}
+                                            />
+                                            <span>{review.rating}</span>
+                                        </div>
+                                        <p className={styles.reviewComment}>
+                                            {review.comment}
+                                        </p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                        <button className={styles.appointmentButton}>
+                            Make an appointment
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );
