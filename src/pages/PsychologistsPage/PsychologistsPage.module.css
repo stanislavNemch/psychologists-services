@@ -1,0 +1,39 @@
+.section {
+    padding: 64px 0;
+    background-color: #f3f3f3; /* Light gray background like in sample */
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1184px;
+    margin: 0 auto;
+    padding: 0 15px; /* Standard container padding */
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.loadMoreButton {
+    align-self: center;
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 14px 48px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 32px;
+}
+
+.loadMoreButton:hover {
+    background-color: var(--color-primary-hover);
+}

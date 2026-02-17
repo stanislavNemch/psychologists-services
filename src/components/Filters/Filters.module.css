@@ -1,0 +1,44 @@
+.filtersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+.label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.29;
+    color: #8a8a89;
+}
+
+.selectWrapper {
+    position: relative;
+    width: 226px;
+}
+
+.select {
+    width: 100%;
+    appearance: none;
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    cursor: pointer;
+    outline: none;
+}
+
+.selectWrapper::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-top-color: #fff;
+    pointer-events: none;
+}

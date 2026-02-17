@@ -1,0 +1,178 @@
+.card {
+    background-color: #fff;
+    border-radius: 24px;
+    padding: 24px;
+    display: flex;
+    gap: 24px;
+    position: relative;
+    width: 100%;
+    /* max-width: 1184px; */
+}
+
+.avatarWrapper {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 30px;
+    border: 2px solid rgba(84, 190, 150, 0.2); /* Light green border */
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.onlineStatus {
+    position: absolute;
+    top: 9px;
+    right: 14px;
+    width: 14px;
+    height: 14px;
+    background-color: #38cd3e;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.titleGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.role {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #8a8a89;
+}
+
+.name {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--color-text);
+}
+
+.metaInfo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.starIcon {
+    color: #ffc531;
+}
+
+.price {
+    /* border-left: 1px solid rgba(25, 26, 21, 0.2); */
+    padding-left: 16px;
+    position: relative;
+}
+
+.price::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 16px;
+    background-color: rgba(25, 26, 21, 0.2);
+}
+
+.priceValue {
+    color: #38cd3e;
+}
+
+.favoriteButton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 28px;
+    color: var(--color-text);
+    transition: color 0.3s ease;
+}
+
+.favoriteButton:hover,
+.favoriteActive {
+    color: var(--color-primary); /* Or red? Design usually has specific color */
+}
+
+.attributesList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+}
+
+.attributeTag {
+    background-color: #f3f3f3;
+    border-radius: 24px;
+    padding: 8px 16px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #8a8a89;
+}
+
+.attributeValue {
+    color: var(--color-text);
+}
+
+.description {
+    font-size: 16px;
+    line-height: 1.25;
+    color: rgba(25, 26, 21, 0.5);
+    margin-bottom: 14px;
+}
+
+.readMoreButton {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    text-decoration: underline;
+    color: var(--color-text);
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.readMoreButton:hover {
+    color: var(--color-primary);
+}
+
+.reviewsSection {
+    margin-top: 14px;
+}
