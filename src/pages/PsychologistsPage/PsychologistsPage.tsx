@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
+import { toast } from "react-hot-toast";
 import { ref, get } from "firebase/database";
 import { database } from "../../firebase/firebase";
 import type { Psychologist } from "../../types/psychologist";
@@ -85,9 +86,10 @@ const PsychologistsPage = () => {
         setVisibleCount((prev) => prev + 3);
     };
 
+    // ... inside handleFavoriteToggle
     const handleFavoriteToggle = (id: string) => {
         if (!currentUser) {
-            alert("Please log in to add to favorites"); // Could be better with a modal trigger
+            toast.error("Please log in to add to favorites");
             return;
         }
         toggleFavorite(id);

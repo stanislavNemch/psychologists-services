@@ -1,6 +1,7 @@
 import Header from "../Header/Header";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
     return (
@@ -11,6 +12,7 @@ const Layout = () => {
                     <Outlet />
                 </Suspense>
             </main>
+            <Toaster position="top-center" reverseOrder={false} />
         </div>
     );
 };

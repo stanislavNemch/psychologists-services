@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import styles from "../shared/Form.module.css";
+import toast from "react-hot-toast";
 
 const schema = yup
     .object({
@@ -39,10 +40,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
         setServerError(null);
         try {
             await signInWithEmailAndPassword(auth, data.email, data.password);
+            toast.success("Logged in successfully!");
             onClose(); // Close modal on success
         } catch (error: any) {
             console.error("Login error:", error);
             setServerError("Invalid email or password.");
+            toast.error("Invalid email or password.");
         }
     };
 
