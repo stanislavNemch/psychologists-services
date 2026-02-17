@@ -1,22 +1,20 @@
 .section {
     padding: 64px 0;
-    width: 100%;
-    min-height: 100vh;
     background-color: #f3f3f3;
+    min-height: 100vh;
 }
 
 .container {
-    max-width: 1440px;
+    max-width: 1184px;
     margin: 0 auto;
-    padding: 0 128px;
+    padding: 0 15px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 32px;
 }
 
 .list {
     display: flex;
     flex-direction: column;
     gap: 32px;
-    width: 100%;
 }
