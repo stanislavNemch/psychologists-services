@@ -1,31 +1,19 @@
-import { useState } from "react";
 import type { Psychologist } from "../../types/psychologist";
 import styles from "./PsychologistCard.module.css";
-import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa"; // Assuming react-icons are installed
-import { useAuth } from "../../hooks/useAuth";
+import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
 import clsx from "clsx";
 
 interface PsychologistCardProps {
     psychologist: Psychologist;
-    // onToggleFavorite: (id: string) => void;
-    // isFavorite: boolean;
+    onToggleFavorite: () => void;
+    isFavorite: boolean;
 }
 
 const PsychologistCard: React.FC<PsychologistCardProps> = ({
     psychologist,
+    onToggleFavorite,
+    isFavorite,
 }) => {
-    const { currentUser } = useAuth();
-    const [isFavorite, setIsFavorite] = useState(false); // Local state for now, will move to global/context later
-
-    const handleFavoriteClick = () => {
-        if (!currentUser) {
-            alert("Please log in to add to favorites"); // Or open login modal
-            return;
-        }
-        setIsFavorite(!isFavorite);
-        // onToggleFavorite(psychologist.id);
-    };
-
     return (
         <div className={styles.card}>
             <div className={styles.avatarWrapper}>
@@ -59,7 +47,7 @@ const PsychologistCard: React.FC<PsychologistCardProps> = ({
                             className={clsx(styles.favoriteButton, {
                                 [styles.favoriteActive]: isFavorite,
                             })}
-                            onClick={handleFavoriteClick}
+                            onClick={onToggleFavorite}
                         >
                             {isFavorite ? (
                                 <FaHeart size={26} />

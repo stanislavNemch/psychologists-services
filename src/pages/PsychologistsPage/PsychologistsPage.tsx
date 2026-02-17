@@ -5,6 +5,8 @@ import type { Psychologist } from "../../types/psychologist";
 import PsychologistCard from "../../components/PsychologistCard/PsychologistCard";
 import Filters from "../../components/Filters/Filters";
 import styles from "./PsychologistsPage.module.css";
+import { useFavorites } from "../../hooks/useFavorites";
+import { useAuth } from "../../hooks/useAuth";
 
 const PsychologistsPage = () => {
     const [allPsychologists, setAllPsychologists] = useState<Psychologist[]>(
@@ -13,6 +15,9 @@ const PsychologistsPage = () => {
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState("Show all");
     const [visibleCount, setVisibleCount] = useState(3);
+
+    const { favorites, toggleFavorite } = useFavorites();
+    const { currentUser } = useAuth();
 
     useEffect(() => {
         const fetchPsychologists = async () => {
@@ -80,6 +85,14 @@ const PsychologistsPage = () => {
         setVisibleCount((prev) => prev + 3);
     };
 
+    const handleFavoriteToggle = (id: string) => {
+        if (!currentUser) {
+            alert("Please log in to add to favorites"); // Could be better with a modal trigger
+            return;
+        }
+        toggleFavorite(id);
+    };
+
     return (
         <section className={styles.section}>
             <div className={styles.container}>
@@ -93,6 +106,10 @@ const PsychologistsPage = () => {
                             <PsychologistCard
                                 key={psychologist.id}
                                 psychologist={psychologist}
+                                isFavorite={favorites.includes(psychologist.id)}
+                                onToggleFavorite={() =>
+                                    handleFavoriteToggle(psychologist.id)
+                                }
                             />
                         ))}
                     </div>
