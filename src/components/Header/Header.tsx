@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import clsx from "clsx";
 import styles from "./Header.module.css";
@@ -7,11 +6,12 @@ import Modal from "../Modal/Modal";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 import LoginForm from "../LoginForm/LoginForm";
 import { FaUser } from "react-icons/fa";
+import { useModal } from "../../hooks/useModal";
 
 const Header = () => {
     const { currentUser, logOut } = useAuth();
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+    const loginModal = useModal();
+    const registerModal = useModal();
 
     // Helper to determine active link class
     const buildLinkClass = ({ isActive }: { isActive: boolean }) => {
@@ -43,13 +43,13 @@ const Header = () => {
                         <>
                             <button
                                 className={styles.loginButton}
-                                onClick={() => setIsLoginModalOpen(true)}
+                                onClick={loginModal.open}
                             >
                                 Log In
                             </button>
                             <button
                                 className={styles.registerButton}
-                                onClick={() => setIsRegisterModalOpen(true)}
+                                onClick={registerModal.open}
                             >
                                 Registration
                             </button>
@@ -75,20 +75,12 @@ const Header = () => {
                 </div>
             </header>
 
-            <Modal
-                isOpen={isLoginModalOpen}
-                onClose={() => setIsLoginModalOpen(false)}
-            >
-                <LoginForm onClose={() => setIsLoginModalOpen(false)} />
+            <Modal isOpen={loginModal.isOpen} onClose={loginModal.close}>
+                <LoginForm onClose={loginModal.close} />
             </Modal>
 
-            <Modal
-                isOpen={isRegisterModalOpen}
-                onClose={() => setIsRegisterModalOpen(false)}
-            >
-                <RegistrationForm
-                    onClose={() => setIsRegisterModalOpen(false)}
-                />
+            <Modal isOpen={registerModal.isOpen} onClose={registerModal.close}>
+                <RegistrationForm onClose={registerModal.close} />
             </Modal>
         </>
     );

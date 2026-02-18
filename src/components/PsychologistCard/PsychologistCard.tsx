@@ -5,6 +5,7 @@ import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
 import clsx from "clsx";
 import Modal from "../Modal/Modal";
 import AppointmentForm from "../AppointmentForm/AppointmentForm";
+import { useModal } from "../../hooks/useModal";
 
 interface PsychologistCardProps {
     psychologist: Psychologist;
@@ -18,7 +19,7 @@ const PsychologistCard: React.FC<PsychologistCardProps> = ({
     isFavorite,
 }) => {
     const [isExpanded, setIsExpanded] = useState(false);
-    const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
+    const appointmentModal = useModal();
 
     return (
         <>
@@ -138,7 +139,7 @@ const PsychologistCard: React.FC<PsychologistCardProps> = ({
                             </ul>
                             <button
                                 className={styles.appointmentButton}
-                                onClick={() => setIsAppointmentModalOpen(true)}
+                                onClick={appointmentModal.open}
                             >
                                 Make an appointment
                             </button>
@@ -148,12 +149,12 @@ const PsychologistCard: React.FC<PsychologistCardProps> = ({
             </div>
 
             <Modal
-                isOpen={isAppointmentModalOpen}
-                onClose={() => setIsAppointmentModalOpen(false)}
+                isOpen={appointmentModal.isOpen}
+                onClose={appointmentModal.close}
             >
                 <AppointmentForm
                     psychologist={psychologist}
-                    onClose={() => setIsAppointmentModalOpen(false)}
+                    onClose={appointmentModal.close}
                 />
             </Modal>
         </>

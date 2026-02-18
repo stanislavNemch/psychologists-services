@@ -3,15 +3,15 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    min-height: 200px; /* Ensure enough vertical space */
-    flex: 1; /* Allow it to grow if needed */
+    min-height: 200px;
+    flex: 1;
 }
 
 .spinner {
     width: 60px;
     height: 60px;
-    border: 5px solid rgba(25, 118, 210, 0.2); /* Light blue track */
-    border-top: 5px solid var(--color-primary); /* Primary color spinner */
+    border: 5px solid rgba(25, 118, 210, 0.2);
+    border-top: 5px solid var(--color-primary);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }

@@ -135,7 +135,6 @@
 }
 
 .placeholder {
-    /* Styles for "00:00" placeholder look if needed, or just same as text */
     color: var(--color-text);
 }
 
@@ -145,14 +144,13 @@
 
 .timeDropdown {
     position: absolute;
-    top: calc(100% + 4px); /* Slightly below */
+    top: calc(100% + 4px);
     right: 0;
-    width: 154px; /* Fixed width based on mockup visually, or 100% of parent? Mockup shows distinct dropdown. Let's make it 100% of parent for now or specific width if it needs to match the input */
-    /* Wait, the mockup shows the dropdown is roughly the width of the input but could be fixed. Input is flex grow. */
+    width: 154px;
     width: 100%;
     background-color: #fff;
     border-radius: 12px;
-    box-shadow: 0px 20px 69px 0px rgba(0, 0, 0, 0.07); /* Smooth shadow */
+    box-shadow: 0px 20px 69px 0px rgba(0, 0, 0, 0.07);
     z-index: 100;
     padding: 16px;
     box-sizing: border-box;
@@ -170,9 +168,8 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-height: 160px; /* Scrollable area */
+    max-height: 160px;
     overflow-y: auto;
-    /* Custom scrollbar styling if needed */
 }
 
 .timeList::-webkit-scrollbar {
@@ -187,7 +184,7 @@
 .timeOption {
     padding: 4px 0;
     font-size: 16px;
-    color: rgba(25, 26, 21, 0.3); /* Inactive color */
+    color: rgba(25, 26, 21, 0.3);
     cursor: pointer;
     text-align: center;
     transition:
@@ -204,18 +201,15 @@
     font-weight: 700;
 }
 
-/* Specific styling for phone placeholder or all placeholders */
 .input::placeholder,
 .textarea::placeholder {
     color: var(--color-text);
-    opacity: 1; /* Default */
+    opacity: 1;
 }
 
-/* Specific override for phone input placeholder transparency request */
-/* Since we don't have a specific class for phone input, I can use attribute selector */
 input[type="tel"]::placeholder {
     color: var(--color-text);
-    opacity: 0.5; /* Semi-transparent */
+    opacity: 0.5;
 }
 
 .errorText {

@@ -2,11 +2,11 @@ import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { toast } from "react-hot-toast";
 import { FiClock } from "react-icons/fi";
 import clsx from "clsx";
 import styles from "./AppointmentForm.module.css";
 import type { Psychologist } from "../../types/psychologist";
+import { useFormHelpers } from "../../hooks/useFormHelpers";
 
 interface AppointmentFormProps {
     psychologist: Psychologist;
@@ -75,6 +75,8 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
         resolver: yupResolver(schema),
     });
 
+    const { handleSuccess } = useFormHelpers({ onClose, reset });
+
     const [isTimeOpen, setIsTimeOpen] = useState(false);
     const timeWrapperRef = useRef<HTMLDivElement>(null);
     const selectedTime = watch("time");
@@ -102,9 +104,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
     };
 
     const onSubmit = () => {
-        toast.success("Appointment request sent successfully!");
-        reset();
-        onClose();
+        handleSuccess("Appointment request sent successfully!");
     };
 
     return (

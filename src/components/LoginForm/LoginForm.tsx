@@ -6,7 +6,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import styles from "../shared/Form.module.css";
-import toast from "react-hot-toast";
+import { useFormHelpers } from "../../hooks/useFormHelpers";
 
 const schema = yup
     .object({
@@ -28,6 +28,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [serverError, setServerError] = useState<string | null>(null);
 
+    const { handleSuccess, handleError } = useFormHelpers({ onClose });
+
     const {
         register,
         handleSubmit,
@@ -40,12 +42,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
         setServerError(null);
         try {
             await signInWithEmailAndPassword(auth, data.email, data.password);
-            toast.success("Logged in successfully!");
-            onClose(); // Close modal on success
+            handleSuccess("Logged in successfully!");
         } catch (error: any) {
-            console.error("Login error:", error);
-            setServerError("Invalid email or password.");
-            toast.error("Invalid email or password.");
+            const msg = handleError(error, "Invalid email or password.");
+            setServerError(msg);
         }
     };
 

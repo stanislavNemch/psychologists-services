@@ -7,7 +7,7 @@ import { auth, database } from "../../firebase/firebase";
 import { ref, set } from "firebase/database";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import styles from "../shared/Form.module.css";
-import toast from "react-hot-toast";
+import { useFormHelpers } from "../../hooks/useFormHelpers";
 
 const schema = yup
     .object({
@@ -39,6 +39,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [serverError, setServerError] = useState<string | null>(null);
 
+    const { handleSuccess, handleError } = useFormHelpers({ onClose });
+
     const {
         register,
         handleSubmit,
@@ -67,16 +69,15 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
                 email: data.email,
             });
 
-            toast.success("Registration successful!");
-            onClose(); // Close modal on success
+            handleSuccess("Registration successful!");
         } catch (error: any) {
-            console.error("Registration error:", error);
             if (error.code === "auth/email-already-in-use") {
-                setServerError("Email is already in use.");
-                toast.error("Email is already in use.");
+                const msg = "Email is already in use.";
+                setServerError(msg);
+                handleError(error, msg);
             } else {
-                setServerError(error.message || "Failed to register.");
-                toast.error(error.message || "Failed to register.");
+                const msg = handleError(error, "Failed to register.");
+                setServerError(msg);
             }
         }
     };
