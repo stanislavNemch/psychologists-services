@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { ref, get } from "firebase/database";
 import { database } from "../../firebase/firebase";
+import { DB_ROOT } from "../../firebase/constants";
 import type { Psychologist } from "../../types/psychologist";
 import PsychologistCard from "../../components/PsychologistCard";
 import Filters from "../../components/Filters";
@@ -25,7 +26,7 @@ const FavoritesPage = () => {
         const fetchPsychologists = async () => {
             setLoading(true);
             try {
-                const rootRef = ref(database, "/");
+                const rootRef = ref(database, `${DB_ROOT}/psychologists`);
                 const rootSnapshot = await get(rootRef);
 
                 if (rootSnapshot.exists()) {

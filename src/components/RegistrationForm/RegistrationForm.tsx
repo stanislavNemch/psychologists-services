@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, database } from "../../firebase/firebase";
+import { DB_ROOT } from "../../firebase/constants";
 import { ref, set } from "firebase/database";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import styles from "../shared/Form.module.css";
@@ -64,10 +65,13 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
             });
 
             // Save user to Realtime Database
-            await set(ref(database, "users/" + user.uid), {
-                username: data.name,
-                email: data.email,
-            });
+            await set(
+                ref(database, `${DB_ROOT}/psychologists/users/${user.uid}`),
+                {
+                    username: data.name,
+                    email: data.email,
+                },
+            );
 
             handleSuccess("Registration successful!");
         } catch (error: any) {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ref, onValue, set, remove } from "firebase/database";
 import { database } from "../firebase/firebase";
+import { DB_ROOT } from "../firebase/constants";
 import { useAuth } from "./useAuth";
 
 export const useFavorites = () => {
@@ -17,7 +18,7 @@ export const useFavorites = () => {
 
         const favoritesRef = ref(
             database,
-            `users/${currentUser.uid}/favorites`,
+            `${DB_ROOT}/psychologists/users/${currentUser.uid}/favorites`,
         );
 
         // Real-time listener
@@ -49,7 +50,7 @@ export const useFavorites = () => {
 
         const favoriteRef = ref(
             database,
-            `users/${currentUser.uid}/favorites/${psychologistId}`,
+            `${DB_ROOT}/psychologists/users/${currentUser.uid}/favorites/${psychologistId}`,
         );
 
         if (favorites.includes(psychologistId)) {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { ref, get } from "firebase/database";
 import { database } from "../../firebase/firebase";
+import { DB_ROOT } from "../../firebase/constants";
 import type { Psychologist } from "../../types/psychologist";
 import PsychologistCard from "../../components/PsychologistCard";
 import Filters from "../../components/Filters";
@@ -32,8 +33,8 @@ const PsychologistsPage = () => {
         const fetchPsychologists = async () => {
             setLoading(true);
             try {
-                // Fetch directly from root as confirmed by user
-                const rootRef = ref(database, "/");
+                // Fetch from isolated app path
+                const rootRef = ref(database, `${DB_ROOT}/psychologists`);
                 const rootSnapshot = await get(rootRef);
 
                 if (rootSnapshot.exists()) {
