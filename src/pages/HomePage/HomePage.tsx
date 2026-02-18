@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import heroImage from "../../assets/hero_img.webp";
 import { GoArrowUpRight } from "react-icons/go";
@@ -18,10 +19,10 @@ const HomePage = () => {
                     and find a guide in your own life with the help of our
                     experienced psychologists.
                 </p>
-                <button className={styles.ctaButton} type="button">
+                <Link to="/psychologists" className={styles.ctaButton}>
                     Get started
                     <GoArrowUpRight size={20} />
-                </button>
+                </Link>
             </div>
 
             <div className={styles.imageContainer}>

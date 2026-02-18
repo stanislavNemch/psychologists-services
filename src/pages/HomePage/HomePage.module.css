@@ -48,6 +48,7 @@
     border-radius: 30px;
     border: none;
     transition: background-color var(--transition);
+    text-decoration: none; /* Added to remove underline from Link */
 }
 
 .ctaButton:hover {
