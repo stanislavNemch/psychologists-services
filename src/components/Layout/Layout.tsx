@@ -1,4 +1,4 @@
-import Header from "../Header/Header";
+import Header from "../Header";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast";

@@ -2,12 +2,13 @@ import { useEffect, useState, useMemo } from "react";
 import { ref, get } from "firebase/database";
 import { database } from "../../firebase/firebase";
 import type { Psychologist } from "../../types/psychologist";
-import PsychologistCard from "../../components/PsychologistCard/PsychologistCard";
-import Filters from "../../components/Filters/Filters";
+import PsychologistCard from "../../components/PsychologistCard";
+import Filters from "../../components/Filters";
 import styles from "./FavoritesPage.module.css";
 import { useFavorites } from "../../hooks/useFavorites";
 import { useAuth } from "../../hooks/useAuth";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../components/Loader";
+import { usePsychologistFilter } from "../../hooks/usePsychologistFilter";
 
 const FavoritesPage = () => {
     const [allPsychologists, setAllPsychologists] = useState<Psychologist[]>(
@@ -15,7 +16,7 @@ const FavoritesPage = () => {
     );
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState("Show all");
-    // const [visibleCount, setVisibleCount] = useState(3); // Pagination might not be needed for favorites, but good to have if list is long
+    const [visibleCount, setVisibleCount] = useState(3);
 
     const { favorites, toggleFavorite, loadingFavorites } = useFavorites();
     const { currentUser } = useAuth();
@@ -39,7 +40,6 @@ const FavoritesPage = () => {
                     setAllPsychologists(list);
                 }
             } catch (error) {
-                console.error("Error fetching data:", error);
             } finally {
                 setLoading(false);
             }
@@ -54,35 +54,17 @@ const FavoritesPage = () => {
         return allPsychologists.filter((p) => favorites.includes(p.id));
     }, [allPsychologists, favorites]);
 
-    // Apply sorting filters to the favorites list
-    const displayedPsychologists = useMemo(() => {
-        let sortedList = [...favoritePsychologists];
+    // Apply sorting filters to the favorites list using custom hook
+    const filteredFavorites = usePsychologistFilter(
+        favoritePsychologists,
+        filter,
+    );
 
-        switch (filter) {
-            case "A to Z":
-                sortedList.sort((a, b) => a.name.localeCompare(b.name));
-                break;
-            case "Z to A":
-                sortedList.sort((a, b) => b.name.localeCompare(a.name));
-                break;
-            case "Less than 10$":
-                sortedList = sortedList.filter((p) => p.price_per_hour < 10);
-                break;
-            case "Greater than 10$":
-                sortedList = sortedList.filter((p) => p.price_per_hour > 10);
-                break;
-            case "Popular":
-                sortedList.sort((a, b) => b.rating - a.rating);
-                break;
-            case "Not popular":
-                sortedList.sort((a, b) => a.rating - b.rating);
-                break;
-            case "Show all":
-            default:
-                break;
-        }
-        return sortedList;
-    }, [favoritePsychologists, filter]);
+    const visiblePsychologists = filteredFavorites.slice(0, visibleCount);
+
+    const handleLoadMore = () => {
+        setVisibleCount((prev) => prev + 3);
+    };
 
     return (
         <section className={styles.section}>
@@ -97,7 +79,7 @@ const FavoritesPage = () => {
                     <p>No favorites added yet.</p>
                 ) : (
                     <div className={styles.list}>
-                        {displayedPsychologists.map((psychologist) => (
+                        {visiblePsychologists.map((psychologist) => (
                             <PsychologistCard
                                 key={psychologist.id}
                                 psychologist={psychologist}
@@ -108,6 +90,15 @@ const FavoritesPage = () => {
                             />
                         ))}
                     </div>
+                )}
+
+                {visibleCount < filteredFavorites.length && (
+                    <button
+                        className={styles.loadMoreButton}
+                        onClick={handleLoadMore}
+                    >
+                        Load more
+                    </button>
                 )}
             </div>
         </section>

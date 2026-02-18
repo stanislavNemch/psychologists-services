@@ -1,14 +1,15 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { ref, get } from "firebase/database";
 import { database } from "../../firebase/firebase";
 import type { Psychologist } from "../../types/psychologist";
-import PsychologistCard from "../../components/PsychologistCard/PsychologistCard";
-import Filters from "../../components/Filters/Filters";
+import PsychologistCard from "../../components/PsychologistCard";
+import Filters from "../../components/Filters";
 import styles from "./PsychologistsPage.module.css";
 import { useFavorites } from "../../hooks/useFavorites";
 import { useAuth } from "../../hooks/useAuth";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../components/Loader";
+import { usePsychologistFilter } from "../../hooks/usePsychologistFilter";
 
 const PsychologistsPage = () => {
     const [allPsychologists, setAllPsychologists] = useState<Psychologist[]>(
@@ -20,6 +21,12 @@ const PsychologistsPage = () => {
 
     const { favorites, toggleFavorite } = useFavorites();
     const { currentUser } = useAuth();
+
+    // Use custom hook for filtering
+    const filteredPsychologists = usePsychologistFilter(
+        allPsychologists,
+        filter,
+    );
 
     useEffect(() => {
         const fetchPsychologists = async () => {
@@ -42,7 +49,6 @@ const PsychologistsPage = () => {
                     setAllPsychologists(list);
                 }
             } catch (error) {
-                console.error("Error fetching data:", error);
             } finally {
                 setLoading(false);
             }
@@ -51,43 +57,12 @@ const PsychologistsPage = () => {
         fetchPsychologists();
     }, []);
 
-    const filteredPsychologists = useMemo(() => {
-        let sortedList = [...allPsychologists];
-
-        switch (filter) {
-            case "A to Z":
-                sortedList.sort((a, b) => a.name.localeCompare(b.name));
-                break;
-            case "Z to A":
-                sortedList.sort((a, b) => b.name.localeCompare(a.name));
-                break;
-            case "Less than 10$":
-                sortedList = sortedList.filter((p) => p.price_per_hour < 10);
-                break;
-            case "Greater than 10$":
-                sortedList = sortedList.filter((p) => p.price_per_hour > 10);
-                break;
-            case "Popular":
-                sortedList.sort((a, b) => b.rating - a.rating);
-                break;
-            case "Not popular":
-                sortedList.sort((a, b) => a.rating - b.rating);
-                break;
-            case "Show all":
-            default:
-                // No specific sorting or filtering
-                break;
-        }
-        return sortedList;
-    }, [allPsychologists, filter]);
-
     const visiblePsychologists = filteredPsychologists.slice(0, visibleCount);
 
     const handleLoadMore = () => {
         setVisibleCount((prev) => prev + 3);
     };
 
-    // ... inside handleFavoriteToggle
     const handleFavoriteToggle = (id: string) => {
         if (!currentUser) {
             toast.error("Please log in to add to favorites");

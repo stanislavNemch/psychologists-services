@@ -3,8 +3,8 @@ import type { Psychologist } from "../../types/psychologist";
 import styles from "./PsychologistCard.module.css";
 import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
 import clsx from "clsx";
-import Modal from "../Modal/Modal";
-import AppointmentForm from "../AppointmentForm/AppointmentForm";
+import Modal from "../Modal";
+import AppointmentForm from "../AppointmentForm";
 import { useModal } from "../../hooks/useModal";
 
 interface PsychologistCardProps {

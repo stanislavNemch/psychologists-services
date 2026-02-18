@@ -2,9 +2,9 @@ import { Link, NavLink } from "react-router-dom";
 import clsx from "clsx";
 import styles from "./Header.module.css";
 import { useAuth } from "../../hooks/useAuth";
-import Modal from "../Modal/Modal";
-import RegistrationForm from "../RegistrationForm/RegistrationForm";
-import LoginForm from "../LoginForm/LoginForm";
+import Modal from "../Modal";
+import RegistrationForm from "../RegistrationForm";
+import LoginForm from "../LoginForm";
 import { FaUser } from "react-icons/fa";
 import { useModal } from "../../hooks/useModal";
 

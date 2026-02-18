@@ -7,6 +7,7 @@ import clsx from "clsx";
 import styles from "./AppointmentForm.module.css";
 import type { Psychologist } from "../../types/psychologist";
 import { useFormHelpers } from "../../hooks/useFormHelpers";
+import { useAuth } from "../../hooks/useAuth";
 
 interface AppointmentFormProps {
     psychologist: Psychologist;
@@ -64,6 +65,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
     psychologist,
     onClose,
 }) => {
+    const { currentUser } = useAuth();
     const {
         register,
         handleSubmit,
@@ -76,6 +78,22 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({
     });
 
     const { handleSuccess } = useFormHelpers({ onClose, reset });
+
+    // Pre-fill form with user data if authenticated
+    useEffect(() => {
+        if (currentUser) {
+            if (currentUser.displayName) {
+                setValue("name", currentUser.displayName);
+            }
+            if (currentUser.email) {
+                setValue("email", currentUser.email);
+            }
+            // If phone number is available in auth profile, pre-fill it
+            if (currentUser.phoneNumber) {
+                setValue("phone", currentUser.phoneNumber);
+            }
+        }
+    }, [currentUser, setValue]);
 
     const [isTimeOpen, setIsTimeOpen] = useState(false);
     const timeWrapperRef = useRef<HTMLDivElement>(null);

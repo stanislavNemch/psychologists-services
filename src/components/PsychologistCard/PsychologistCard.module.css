@@ -6,7 +6,6 @@
     gap: 24px;
     position: relative;
     width: 100%;
-    /* max-width: 1184px; */
 }
 
 .avatarWrapper {
@@ -14,7 +13,7 @@
     width: 120px;
     height: 120px;
     border-radius: 30px;
-    border: 2px solid rgba(84, 190, 150, 0.2); /* Light green border */
+    border: 2px solid rgba(84, 190, 150, 0.2);
     padding: 12px;
     display: flex;
     justify-content: center;
@@ -94,7 +93,6 @@
 }
 
 .price {
-    /* border-left: 1px solid rgba(25, 26, 21, 0.2); */
     padding-left: 16px;
     position: relative;
 }
@@ -126,7 +124,7 @@
 
 .favoriteButton:hover,
 .favoriteActive {
-    color: var(--color-primary); /* Or red? Design usually has specific color */
+    color: var(--color-primary);
 }
 
 .attributesList {
@@ -199,7 +197,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background-color: rgba(84, 190, 150, 0.2); /* Light green background */
+    background-color: rgba(84, 190, 150, 0.2);
     color: var(--color-primary);
     display: flex;
     justify-content: center;
@@ -213,10 +211,9 @@
 .reviewContent {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Gap between name/rating and comment? Mockup shows name then stars below? No, likely name and rating grouped or stacked */
+    gap: 8px;
 }
 
-/* Mockup: Name (bold), then below it Rating (Star + Number). Then below that Comment. */
 .reviewerName {
     font-weight: 500;
     font-size: 16px;
