@@ -3,6 +3,9 @@
     justify-content: space-between;
     align-items: center;
     height: 80px;
+    position: relative;
+    /* Ensure header stays on top if needed, though modal usually handles highest z-index */
+    z-index: 50;
 }
 
 .logo {
@@ -11,16 +14,40 @@
     line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--color-primary);
+    z-index: 51; /* Keep logo above mobile menu */
 }
 
 .logo span {
     color: var(--color-text);
 }
 
+.burgerButton {
+    display: none; /* Hidden by default on desktop */
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    z-index: 51; /* Keep burger button above mobile menu */
+    padding: 8px;
+}
+
+/* Container for nav and auth - Desktop default */
+.menuContainer {
+    display: flex;
+    justify-content: flex-end; /* Changed from space-between to flex-end to push Auth right */
+    align-items: center;
+    flex-grow: 1;
+    margin-left: 0; /* Removed margin-left */
+}
+
 .nav {
     display: flex;
     gap: 40px;
     align-items: center;
+    /* Absolute positioning for perfect centering on Desktop */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .navLink {
@@ -60,6 +87,7 @@
     display: flex;
     gap: 8px;
     align-items: center;
+    /* margin-left: auto; Removed as flex-end handles it */
 }
 
 .loginButton {
@@ -151,4 +179,67 @@
     background-color: var(--color-primary);
     color: #fff;
     border-color: var(--color-primary);
+}
+
+/* Tablet & Mobile Styles */
+@media screen and (max-width: 960px) {
+    .burgerButton {
+        display: block;
+        margin-left: auto;
+    }
+
+    .menuContainer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--color-background); /* Use theme bg */
+        flex-direction: column;
+        justify-content: center;
+        gap: 40px;
+        margin-left: 0;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 50; /* Behind logo/burger */
+        padding: 20px;
+    }
+
+    .menuContainer.mobileMenuOpen {
+        transform: translateX(0);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: 32px;
+        font-size: 24px;
+        /* Reset absolute positioning for mobile */
+        position: static;
+        transform: none;
+    }
+
+    .navLink {
+        font-size: 24px; /* Larger text for mobile touch */
+    }
+
+    .authContainer {
+        flex-direction: column;
+        margin-left: 0;
+        gap: 16px;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .userContainer {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .loginButton,
+    .registerButton,
+    .logoutButton {
+        width: 100%;
+        text-align: center;
+    }
 }

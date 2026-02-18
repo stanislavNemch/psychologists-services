@@ -1,13 +1,13 @@
 .section {
     padding: 64px 0;
-    background-color: #f3f3f3; /* Light gray background like in sample */
+    background-color: #f3f3f3;
     min-height: 100vh;
 }
 
 .container {
     max-width: 1184px;
     margin: 0 auto;
-    padding: 0 15px; /* Standard container padding */
+    padding: 0 15px;
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -36,4 +36,14 @@
 
 .loadMoreButton:hover {
     background-color: var(--color-primary-hover);
+}
+
+@media screen and (max-width: 768px) {
+    .section {
+        padding: 40px 0;
+    }
+
+    .list {
+        gap: 20px;
+    }
 }

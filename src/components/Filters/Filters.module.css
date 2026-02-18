@@ -33,12 +33,21 @@
 }
 
 .selectWrapper::after {
-    content: "";
+    content: ""; /* Corrected content property */
     position: absolute;
     top: 50%;
     right: 18px;
     transform: translateY(-50%);
-    border: 6px solid transparent;
-    border-top-color: #fff;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #fff;
     pointer-events: none;
+}
+
+@media screen and (max-width: 480px) {
+    .selectWrapper {
+        width: 100%;
+    }
 }

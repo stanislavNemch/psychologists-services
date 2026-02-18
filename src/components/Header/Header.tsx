@@ -5,13 +5,19 @@ import { useAuth } from "../../hooks/useAuth";
 import Modal from "../Modal";
 import RegistrationForm from "../RegistrationForm";
 import LoginForm from "../LoginForm";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaBars, FaTimes } from "react-icons/fa";
 import { useModal } from "../../hooks/useModal";
+import { useState } from "react";
 
 const Header = () => {
     const { currentUser, logOut } = useAuth();
     const loginModal = useModal();
     const registerModal = useModal();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen((prev) => !prev);
+    };
 
     // Helper to determine active link class
     const buildLinkClass = ({ isActive }: { isActive: boolean }) => {
@@ -24,54 +30,94 @@ const Header = () => {
                 <Link to="/" className={styles.logo}>
                     psychologists.<span>services</span>
                 </Link>
-                <nav className={styles.nav}>
-                    <NavLink to="/" className={buildLinkClass}>
-                        Home
-                    </NavLink>
-                    <NavLink to="/psychologists" className={buildLinkClass}>
-                        Psychologists
-                    </NavLink>
-                    {currentUser && (
-                        <NavLink to="/favorites" className={buildLinkClass}>
-                            Favorites
-                        </NavLink>
-                    )}
-                </nav>
 
-                <div className={styles.authContainer}>
-                    {!currentUser ? (
-                        <>
-                            <button
-                                className={styles.loginButton}
-                                onClick={loginModal.open}
-                            >
-                                Log In
-                            </button>
-                            <button
-                                className={styles.registerButton}
-                                onClick={registerModal.open}
-                            >
-                                Registration
-                            </button>
-                        </>
+                <button
+                    className={styles.burgerButton}
+                    onClick={toggleMobileMenu}
+                    aria-label="Toggle menu"
+                >
+                    {isMobileMenuOpen ? (
+                        <FaTimes size={24} />
                     ) : (
-                        <div className={styles.userContainer}>
-                            <div className={styles.userInfo}>
-                                <div className={styles.userAvatar}>
-                                    <FaUser size={20} />
-                                </div>
-                                <span className={styles.userName}>
-                                    {currentUser.displayName}
-                                </span>
-                            </div>
-                            <button
-                                className={styles.logoutButton}
-                                onClick={logOut}
-                            >
-                                Log out
-                            </button>
-                        </div>
+                        <FaBars size={24} />
                     )}
+                </button>
+
+                <div
+                    className={clsx(styles.menuContainer, {
+                        [styles.mobileMenuOpen]: isMobileMenuOpen,
+                    })}
+                >
+                    <nav className={styles.nav}>
+                        <NavLink
+                            to="/"
+                            className={buildLinkClass}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Home
+                        </NavLink>
+                        <NavLink
+                            to="/psychologists"
+                            className={buildLinkClass}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Psychologists
+                        </NavLink>
+                        {currentUser && (
+                            <NavLink
+                                to="/favorites"
+                                className={buildLinkClass}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Favorites
+                            </NavLink>
+                        )}
+                    </nav>
+
+                    <div className={styles.authContainer}>
+                        {!currentUser ? (
+                            <>
+                                <button
+                                    className={styles.loginButton}
+                                    onClick={() => {
+                                        loginModal.open();
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                >
+                                    Log In
+                                </button>
+                                <button
+                                    className={styles.registerButton}
+                                    onClick={() => {
+                                        registerModal.open();
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                >
+                                    Registration
+                                </button>
+                            </>
+                        ) : (
+                            <div className={styles.userContainer}>
+                                <div className={styles.userInfo}>
+                                    <div className={styles.userAvatar}>
+                                        <FaUser size={20} />
+                                    </div>
+                                    <span className={styles.userName}>
+                                        {currentUser.displayName}
+                                    </span>
+                                </div>
+                                <button
+                                    className={styles.logoutButton}
+                                    onClick={() => {
+                                        logOut();
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                >
+                                    Log out
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </header>
 

@@ -37,3 +37,13 @@
 .loadMoreButton:hover {
     background-color: var(--color-primary-hover);
 }
+
+@media screen and (max-width: 768px) {
+    .section {
+        padding: 40px 0;
+    }
+
+    .list {
+        gap: 20px;
+    }
+}
