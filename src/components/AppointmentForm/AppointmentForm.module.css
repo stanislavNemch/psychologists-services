@@ -1,0 +1,251 @@
+.container {
+    padding: 0;
+    max-width: 470px; /* Adjust as needed */
+    width: 100%;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: 20px;
+}
+
+.description {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    color: rgba(25, 26, 21, 0.5);
+    margin-bottom: 40px;
+}
+
+.psychologistInfo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.psychologistText {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.label {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    color: #8a8a89;
+}
+
+.name {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.inputsRow {
+    display: flex;
+    gap: 8px;
+}
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.input,
+.textarea,
+.select {
+    width: 100%;
+    padding: 16px 18px;
+    border: 1px solid rgba(25, 26, 21, 0.1);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--color-text);
+    background-color: transparent;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: var(--color-text);
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+    border-color: var(--color-primary);
+}
+
+.textarea {
+    resize: none;
+    min-height: 116px;
+}
+
+/* ... existing styles ... */
+
+.timeWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.timeInput {
+    width: 100%;
+    padding: 16px 18px;
+    border: 1px solid rgba(25, 26, 21, 0.1);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--color-text);
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.timeInputActive,
+.timeInput:hover {
+    border-color: var(--color-primary);
+}
+
+.placeholder {
+    /* Styles for "00:00" placeholder look if needed, or just same as text */
+    color: var(--color-text);
+}
+
+.clockIcon {
+    color: var(--color-text);
+}
+
+.timeDropdown {
+    position: absolute;
+    top: calc(100% + 4px); /* Slightly below */
+    right: 0;
+    width: 154px; /* Fixed width based on mockup visually, or 100% of parent? Mockup shows distinct dropdown. Let's make it 100% of parent for now or specific width if it needs to match the input */
+    /* Wait, the mockup shows the dropdown is roughly the width of the input but could be fixed. Input is flex grow. */
+    width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 20px 69px 0px rgba(0, 0, 0, 0.07); /* Smooth shadow */
+    z-index: 100;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.timeDropdownHeader {
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--color-text);
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.timeList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 160px; /* Scrollable area */
+    overflow-y: auto;
+    /* Custom scrollbar styling if needed */
+}
+
+.timeList::-webkit-scrollbar {
+    width: 6px;
+}
+
+.timeList::-webkit-scrollbar-thumb {
+    background-color: rgba(25, 26, 21, 0.2);
+    border-radius: 4px;
+}
+
+.timeOption {
+    padding: 4px 0;
+    font-size: 16px;
+    color: rgba(25, 26, 21, 0.3); /* Inactive color */
+    cursor: pointer;
+    text-align: center;
+    transition:
+        color 0.2s ease,
+        font-weight 0.2s ease;
+}
+
+.timeOption:hover {
+    color: var(--color-text);
+}
+
+.timeOptionSelected {
+    color: var(--color-text);
+    font-weight: 700;
+}
+
+/* Specific styling for phone placeholder or all placeholders */
+.input::placeholder,
+.textarea::placeholder {
+    color: var(--color-text);
+    opacity: 1; /* Default */
+}
+
+/* Specific override for phone input placeholder transparency request */
+/* Since we don't have a specific class for phone input, I can use attribute selector */
+input[type="tel"]::placeholder {
+    color: var(--color-text);
+    opacity: 0.5; /* Semi-transparent */
+}
+
+.errorText {
+    color: #ef5050;
+    font-size: 12px;
+    margin-top: 4px;
+    position: absolute;
+    bottom: -18px;
+    left: 0;
+}
+
+.submitButton {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    padding: 16px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 24px;
+}
+
+.submitButton:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.submitButton:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
