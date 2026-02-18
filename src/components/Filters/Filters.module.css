@@ -15,11 +15,11 @@
 .selectWrapper {
     position: relative;
     width: 226px;
+    font-family: var(--font-family);
 }
 
-.select {
+.triggerButton {
     width: 100%;
-    appearance: none;
     background-color: var(--color-primary);
     color: #fff;
     border: none;
@@ -30,20 +30,61 @@
     line-height: 1.25;
     cursor: pointer;
     outline: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color var(--transition);
 }
 
-.selectWrapper::after {
-    content: ""; /* Corrected content property */
+.triggerButton:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.chevron {
+    transition: transform var(--transition);
+}
+
+.chevronOpen {
+    transform: rotate(180deg);
+}
+
+.dropdownMenu {
     position: absolute;
-    top: 50%;
-    right: 18px;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #fff;
-    pointer-events: none;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background-color: var(--color-white);
+    border-radius: 14px;
+    box-shadow: 0 20px 69px 0 rgba(0, 0, 0, 0.07);
+    padding: 8px 0; /* Changed from 14px 18px to vertical padding only for options */
+    z-index: 100;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.option {
+    padding: 8px 18px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--color-text);
+    opacity: 0.5; /* Opacity for default state */
+    cursor: pointer;
+    transition:
+        color var(--transition),
+        background-color var(--transition);
+}
+
+.option:hover {
+    color: var(--color-text);
+    opacity: 1;
+    background-color: var(--color-secondary); /* Use theme secondary color */
+}
+
+.selectedOption {
+    color: var(--color-text);
+    font-weight: 500;
 }
 
 @media screen and (max-width: 480px) {

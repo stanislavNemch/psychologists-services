@@ -16,6 +16,7 @@
 
 .modal {
     background-color: var(--color-background);
+    color: var(--color-text);
     border-radius: 30px;
     padding: 64px;
     position: relative;
@@ -34,6 +35,7 @@
     border: none;
     cursor: pointer;
     padding: 0;
+    color: var(--color-text); /* Ensure icon is visible */
     display: flex;
     align-items: center;
     justify-content: center;

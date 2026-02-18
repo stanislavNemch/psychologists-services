@@ -1,27 +1,84 @@
+import { useState, useRef, useEffect } from "react";
 import styles from "./Filters.module.css";
+import clsx from "clsx";
+import { FaChevronDown } from "react-icons/fa";
 
 interface FiltersProps {
     onFilterChange: (filter: string) => void;
 }
 
+const options = [
+    "A to Z",
+    "Z to A",
+    "Less than 10$",
+    "Greater than 10$",
+    "Popular",
+    "Not popular",
+    "Show all",
+];
+
 const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selected, setSelected] = useState("Show all");
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    const handleSelect = (option: string) => {
+        setSelected(option);
+        onFilterChange(option);
+        setIsOpen(false);
+    };
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target as Node)
+            ) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     return (
         <div className={styles.filtersContainer}>
             <label className={styles.label}>Filters</label>
-            <div className={styles.selectWrapper}>
-                <select
-                    className={styles.select}
-                    defaultValue="Show all"
-                    onChange={(e) => onFilterChange(e.target.value)}
+            <div className={styles.selectWrapper} ref={dropdownRef}>
+                <button
+                    className={styles.triggerButton}
+                    onClick={() => setIsOpen(!isOpen)}
+                    type="button"
+                    aria-expanded={isOpen}
                 >
-                    <option value="A to Z">A to Z</option>
-                    <option value="Z to A">Z to A</option>
-                    <option value="Less than 10$">Less than 10$</option>
-                    <option value="Greater than 10$">Greater than 10$</option>
-                    <option value="Popular">Popular</option>
-                    <option value="Not popular">Not popular</option>
-                    <option value="Show all">Show all</option>
-                </select>
+                    {selected}
+                    <FaChevronDown
+                        className={clsx(styles.chevron, {
+                            [styles.chevronOpen]: isOpen,
+                        })}
+                        size={14}
+                    />
+                </button>
+                {isOpen && (
+                    <div className={styles.dropdownMenu}>
+                        {options.map((option) => (
+                            <div
+                                key={option}
+                                className={clsx(styles.option, {
+                                    [styles.selectedOption]:
+                                        selected === option,
+                                })}
+                                onClick={() => handleSelect(option)}
+                            >
+                                {option}
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

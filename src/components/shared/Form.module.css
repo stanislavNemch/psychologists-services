@@ -16,7 +16,8 @@
 .description {
     font-size: 16px;
     line-height: 1.25;
-    color: rgba(25, 26, 21, 0.5); /* Semi-transparent text */
+    color: var(--color-text);
+    opacity: 0.5;
     margin-bottom: 40px;
     margin-top: -10px;
 }
@@ -35,10 +36,17 @@
     width: 100%;
     padding: 16px 18px;
     border-radius: 12px;
-    border: 1px solid rgba(25, 26, 21, 0.1);
+    border: 1px solid var(--color-border);
     font-size: 16px;
+    color: var(--color-text);
+    background-color: transparent;
     outline: none;
     transition: border-color var(--transition);
+}
+
+.input::placeholder {
+    color: var(--color-text);
+    opacity: 0.5;
 }
 
 .input:focus {
@@ -61,7 +69,8 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    color: rgba(25, 26, 21, 0.5);
+    color: var(--color-text);
+    opacity: 0.5;
 }
 
 .submitButton {
