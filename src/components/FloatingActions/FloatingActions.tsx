@@ -1,5 +1,5 @@
-import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
-import ScrollToTop from "../ScrollToTop/ScrollToTop";
+import ThemeSwitcher from "../ThemeSwitcher";
+import ScrollToTop from "../ScrollToTop";
 import styles from "./FloatingActions.module.css";
 
 const FloatingActions = () => {
