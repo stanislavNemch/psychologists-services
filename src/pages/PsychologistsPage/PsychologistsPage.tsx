@@ -8,6 +8,7 @@ import Filters from "../../components/Filters/Filters";
 import styles from "./PsychologistsPage.module.css";
 import { useFavorites } from "../../hooks/useFavorites";
 import { useAuth } from "../../hooks/useAuth";
+import Loader from "../../components/Loader/Loader";
 
 const PsychologistsPage = () => {
     const [allPsychologists, setAllPsychologists] = useState<Psychologist[]>(
@@ -99,9 +100,8 @@ const PsychologistsPage = () => {
         <section className={styles.section}>
             <div className={styles.container}>
                 <Filters onFilterChange={setFilter} />
-
                 {loading ? (
-                    <p>Loading...</p>
+                    <Loader />
                 ) : (
                     <div className={styles.list}>
                         {visiblePsychologists.map((psychologist) => (
@@ -116,7 +116,6 @@ const PsychologistsPage = () => {
                         ))}
                     </div>
                 )}
-
                 {visibleCount < filteredPsychologists.length && (
                     <button
                         className={styles.loadMoreButton}

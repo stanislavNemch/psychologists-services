@@ -7,6 +7,7 @@ import Filters from "../../components/Filters/Filters";
 import styles from "./FavoritesPage.module.css";
 import { useFavorites } from "../../hooks/useFavorites";
 import { useAuth } from "../../hooks/useAuth";
+import Loader from "../../components/Loader/Loader";
 
 const FavoritesPage = () => {
     const [allPsychologists, setAllPsychologists] = useState<Psychologist[]>(
@@ -83,50 +84,31 @@ const FavoritesPage = () => {
         return sortedList;
     }, [favoritePsychologists, filter]);
 
-    // If user is not logged in or favorites loading
-    if (loading || loadingFavorites) {
-        return (
-            <div className={styles.section}>
-                <p>Loading...</p>
-            </div>
-        );
-    }
-
-    if (!currentUser) {
-        return (
-            <div className={styles.section}>
-                <p>Please log in to view favorites.</p>
-            </div>
-        );
-    }
-
-    if (favoritePsychologists.length === 0) {
-        return (
-            <section className={styles.section}>
-                <div className={styles.container}>
-                    <p>No favorites added yet.</p>
-                </div>
-            </section>
-        );
-    }
-
     return (
         <section className={styles.section}>
             <div className={styles.container}>
                 <Filters onFilterChange={setFilter} />
 
-                <div className={styles.list}>
-                    {displayedPsychologists.map((psychologist) => (
-                        <PsychologistCard
-                            key={psychologist.id}
-                            psychologist={psychologist}
-                            isFavorite={true} // They are in this list so they are favorites
-                            onToggleFavorite={() =>
-                                toggleFavorite(psychologist.id)
-                            }
-                        />
-                    ))}
-                </div>
+                {loading || loadingFavorites ? (
+                    <Loader />
+                ) : !currentUser ? (
+                    <p>Please log in to view favorites.</p>
+                ) : favoritePsychologists.length === 0 ? (
+                    <p>No favorites added yet.</p>
+                ) : (
+                    <div className={styles.list}>
+                        {displayedPsychologists.map((psychologist) => (
+                            <PsychologistCard
+                                key={psychologist.id}
+                                psychologist={psychologist}
+                                isFavorite={true}
+                                onToggleFavorite={() =>
+                                    toggleFavorite(psychologist.id)
+                                }
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
         </section>
     );
