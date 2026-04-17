@@ -1,6 +1,38 @@
 {
-    "rules": {
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "goit-services-training": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+
+    "learn-lingo-services": {
+      "teachers": {
         ".read": true,
         ".write": "auth != null"
+      },
+      "users": {
+        ".read": true,
+        ".write": "auth != null"
+      }
+    },
+
+    "nanny-services": {
+      "nannies": {
+        ".read": true,
+        ".write": "auth != null"
+      },
+      "users": {
+        ".read": true,
+        ".write": "auth != null"
+      }
+    },
+
+    "psychologists": {
+      ".read": true,
+      ".write": "auth != null"
     }
+  }
 }
